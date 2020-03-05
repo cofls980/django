@@ -3,7 +3,7 @@ Description=EC2 Deploy uWSGI service
 After=syslog.target
 
 [Service]
-ExecStart=/home/ubuntu/aa/django/venv/bin/uwsgi -i /srv/django/Prac1/.config/uwsgi.ini
+ExecStart=/srv/django/venv/bin/uwsgi -i /srv/django/.config/uwsgi.ini
 Restart=always
 KillSignal=SIGQUIT
 Type=notify
