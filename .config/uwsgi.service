@@ -1,0 +1,14 @@
+[Unit]
+Description=EC2 Deploy uWSGI service
+After=syslog.target
+
+[Service]
+ExecStart=/home/ubuntu/aa/django/venv/bin/uwsgi -i /srv/django/Prac1/.config/uwsgi.ini
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+StandardError=syslog
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
