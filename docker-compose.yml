@@ -4,37 +4,34 @@ services:
   db:
     image: mysql
     volumes:
-      - ../data: /var/lib/mysql
+      - ../data:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD: 1234
-      - MYSQL_USER: user1
-      - MYSQL_PASSWORD: 1234
-      - MYSQL_DATABASE: test
-    container_name: test_mysql
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_USER=user1
+      - MYSQL_PASSWORD=1234
+      - MYSQL_DATABASE=test
+    container_name: mysql
     ports:
-      - "3306: 3306"
+      - "3306:3306"
   django:
     build:
       context: .
       dockerfile: Dockerfile
-      environment:
-        - DJANGO_DEBUG = False
-        - DJANGO_DB_HOST = db
-        - DJANGO_DB_PORT = 3306
-        - DJAGNO_DB_USERNAME = user1
-        - DJANGO_DB_PASSWORD = 1234
+    environment:
+      - DJANGO_DEBUG=False
+      - DJANGO_DB_HOST=db
+      - DJANGO_DB_PORT=3306
+      - DJAGNO_DB_USERNAME=user1
+      - DJANGO_DB_PASSWORD=1234
+    container_name: django
     ports:
       - "8000:8000"
-    command:
-      - python3 manage.py runserver 0:8000
     volumes:
-      - ./ : /app/
+      - .:/code/
     depends_on:
       - db
-    links:
-      - db
-
-  nginx:
-    image: nginx
-    ports
+    command:
+      - bash
+      - -c
+         | /wait-for-it.sh db:3306 -t 10
 
