@@ -5,7 +5,7 @@ EXPOSE 8000
 
 RUN apt-get -y update
 RUN apt-get -y update
-RUN apt-get -y install python3.8 python3-pip python3.8-dev libmysqlclient-dev mysql-server virtualenv
+RUN apt-get -y install python3.8 python3-pip python3.8-dev libmysqlclient-dev
 RUN ln -sf /usr/bin/python3.8 /usr/bin/python3
 
 RUN pip3 install --upgrade pip
