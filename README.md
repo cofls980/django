@@ -1,3 +1,3 @@
 # django
-slack test
+slack test\n
 all participated!!
